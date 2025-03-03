@@ -1,0 +1,50 @@
+import java.util.Scanner;
+import java.util.Random;
+
+public class GuessNumber {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Random rand = new Random();
+        
+        int score = 0;
+        boolean playAgain = true;
+        
+        System.out.println("🎮 Welcome to the Number Guessing Game!");
+
+        while (playAgain) {
+            int number = rand.nextInt(100) + 1; // Random number between 1 and 100
+            int attempts = 7; // Limit attempts per round
+            int guess = 0;
+            
+            System.out.println("Guess the number between 1 and 100. You have " + attempts + " attempts.");
+
+            while (attempts > 0) {
+                System.out.print("Enter your guess: ");
+                guess = sc.nextInt();
+                
+                if (guess == number) {
+                    System.out.println("🎉 Correct! You guessed it in " + (7 - attempts + 1) + " attempt(s).");
+                    score++;
+                    break;
+                } else if (guess < number) {
+                    System.out.println("Too low! Try again.");
+                } else {
+                    System.out.println("Too high! Try again.");
+                }
+                attempts--;
+            }
+
+            if (attempts == 0) {
+                System.out.println("❌ Out of attempts! The correct number was: " + number);
+            }
+
+            System.out.println("Your current score: " + score);
+            System.out.print("Do you want to play again? (1 for Yes, 0 for No): ");
+            int choice = sc.nextInt();
+            playAgain = (choice == 1);
+        }
+
+        System.out.println("Thanks for playing! Your final score: " + score);
+        sc.close();
+    }
+}
